@@ -1,0 +1,132 @@
+# Projects
+import time
+
+now= time.time()
+current_time= (time.asctime())
+current_time = current_time[11:20]
+
+import random
+
+print("You can ask questions like 'what is the time now','pick a random number','who created you' and 'math'.\nNew: Number guessing game")
+
+name= raw_input("What's your name?")
+if len(name)> 0:
+  print ("Hello ")+ name
+
+def chat(text):
+  answer= input(text)
+    
+  if answer== "what is the time now" or answer=="tell me the time" or answer== "whatisthetimenow" or answer=="what's the time now" or answer=="time":
+    print (current_time)
+  elif answer== "pick a random number" or answer=="randomly pick a number" or answer== "pick a number":
+    print random.randint(1,100)
+  elif answer== "who created you" or answer=="Who created you" or answer== "whocreatedyou":
+    print ("Aman created me")
+  elif answer== "do a math" or answer== "solve a math problem" or answer== "math":
+    num1= raw_input("enter a number")
+    num2= raw_input("enter another number")
+    sign= raw_input("enter the mathematical symbol")
+
+    if sign== "+":
+      print (int(num1) + int(num2))
+    elif sign== "-" :
+      print (int(num1) - int(num2))
+    elif sign== "×" or sign== "*":
+      print (int(num1) * int(num2))
+    elif sign=="/" or sign== "÷":
+      print (int(num1) / int(num2))
+    elif sign== "^":
+      print (int(num1) ** int(num2))
+    else:
+      print ("sorry")
+  
+  elif answer== "what is my name" or answer== "my name" or answer== "who am i":
+    print "Your name is "+ name
+  elif answer == "play a game" or answer == "game"  or answer == "number guessing game":
+    guessesTaken = 0
+     
+    number = random.randint(1, 20)
+    print('Well, ' + name + ', I am thinking of a number between 1 and 20.')
+    
+    while guessesTaken < 6:
+      print('Take a guess.') # There are four spaces in front of print.
+      guess = input()
+      guess = int(guess)
+    
+      guessesTaken = guessesTaken + 1
+    
+      if guess < number:
+        print('Your guess is too low.') # There are eight spaces in front of print.
+    
+      if guess > number:
+        print('Your guess is too high.')
+    
+      if guess == number:
+        break
+    
+    if guess == number:
+      guessesTaken = str(guessesTaken)
+      print('Good job, ' + name + '! You guessed my number in ' + guessesTaken + ' guesses!')
+    
+    if guess != number:
+      number = str(number)
+      print('Nope. The number I was thinking of was ' + number)
+  
+  elif answer== "rock paper scissors" or answer== "play rps":
+    def play():
+      continue_playing = True
+      while continue_playing:  # You already have a loop so no need to call play() in the function
+        p_choice = input("What do you choose?").capitalize()
+        # You need to validate user input too
+        while p_choice not in ("Rock", "Paper", "Scissors"):
+            print("Please try again")
+            p_choice = input("What do you choose?")
+        cpu_choice = random.choice(("Rock", "Paper", "Scissors"))
+        # Much clearer than randint
+        # Here I use tuples, which are basically lists you can't modify
+        # Python will optimize these in certain cases so use them instead of lists for things you never change
+
+        # Defining compare() is useless since you only call it once anyway
+        # Comments are only for explanation, if your code is simple to understand try to avoid comments. For example, people can see if you compare to "Rock" that it's the logic for the rock outcomes
+        if p_choice == cpu_choice:
+            print("Tie!")
+        elif p_choice == "Rock" and cpu_choice == "Paper":
+            print("You Lose!")
+        elif p_choice == "Rock" and cpu_choice == "Scissors":
+            print("You Win!")
+        elif p_choice == "Paper" and cpu_choice == "Scissors":
+            print("You Lose!")
+        elif p_choice == "Paper" and cpu_choice == "Rock":
+            print("You Win!")
+        elif p_choice == "Scissors" and cpu_choice == "Rock":
+            print("You Lose!")
+        elif p_choice == "Scissors" and cpu_choice == "Paper":
+            print("You Win!")
+        play_again = input("Play again?").capitalize()
+        while play_again not in ("Yes", "No"):  # validate user input
+            print("Please try again")
+            play_again = input("Play again?")
+        if play_again == "No":
+            print("Game Over")
+            continue_playing = False
+        # Don't return here (you returned the input), I really don't think that's what you wanted
+
+    def game_start():
+      while True:
+        begin = input("Would you like to play Rock, Paper, Scissors?").capitalize()
+        if begin == "Yes" or begin== "yes":
+            play()
+        elif begin == "No" or begin== "no":
+            print("Game Over")
+            break
+        else:
+            print("Please try again")
+        # No need for return or break here, if-else is enough
+
+#if __name__ == "__main__":  # Only run this if run from commandline
+    game_start()
+  else:
+    print ("Sorry I don't understand")
+chat("What can I do for you?")
+while True:
+  chat("What else can I do for you?")
